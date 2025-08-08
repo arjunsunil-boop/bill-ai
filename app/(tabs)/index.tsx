@@ -1,12 +1,13 @@
 import { Text, View, StyleSheet } from "react-native";
 import { Link } from "expo-router";
+import ScanButton from "@/components/ScanButton";
 export default function Index() {
   return (
     <View style={styles.container}>
       
-      <Text style={styles.text}>Hello World </Text>
-      <Text style={styles.text}> Click here to go to billsPage</Text>
-      <Link href={"/billsPage"} style={styles.button}>Bills</Link>
+      <Text style={styles.text}>Here will be our Camera area </Text>
+      
+      <ScanButton label="Scan Now"/>
 
     </View>
 
@@ -27,7 +28,7 @@ const styles = StyleSheet.create(
     button:{
       color:'#fff',
       fontSize:20,
-      textDecorationLine:"underline"
+      textDecorationLine:"underline",
 
     }
   }
