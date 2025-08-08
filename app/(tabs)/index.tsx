@@ -2,15 +2,18 @@ import { Text, View, StyleSheet } from "react-native";
 import { Link } from "expo-router";
 import ScanButton from "@/components/ScanButton";
 import SelectFile from "@/components/SelectFile";
+import CameraArea from "@/components/CamerArea";
+
 export default function Index() {
   return (
     <View style={styles.container}>
+      <CameraArea/>
       
-      <Text style={styles.text}>Here will be our Camera area </Text>
       
-      <ScanButton label="Scan Now"/>
+      
+      <ScanButton label=""/>
       <Text style={styles.text}> Or</Text>
-      <SelectFile label = "Select File from phone"/>
+      <SelectFile label = "Choose a Bill"/>
       
 
     </View>
