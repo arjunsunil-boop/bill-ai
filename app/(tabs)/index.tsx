@@ -3,11 +3,17 @@ import { Link, router } from "expo-router";
 import ScanButton from "@/components/ScanButton";
 import SelectFile from "@/components/SelectFile";
 import CameraArea from "@/components/CamerArea";
+import BillDescriptor from "../billDescript";
 import * as ImagePicker from 'expo-image-picker';
+import { useState } from "react";
 
 
 
 export default function Index() {
+
+  const [selectedImage,setSelectedImage]=useState<string |undefined>(undefined)
+  const [modalTrue,setModaltrue] = useState(false)
+   
   const pickImageAsync = async()=>{
     let result = await ImagePicker.launchImageLibraryAsync(
       {
@@ -18,12 +24,10 @@ export default function Index() {
     )
 
     if (!result.canceled){
+      setSelectedImage(result.assets[0].uri)
+      setModaltrue(true)
+      
 
-
-      router.push({
-        pathname:'/billDescript',
-
-      })
       
     }else {
       alert("You did not select any image!")
@@ -38,6 +42,13 @@ export default function Index() {
       <ScanButton label=""/>
       <Text style={styles.text}> Or</Text>
       <SelectFile label = "Choose a Bill" onPress={pickImageAsync}/>
+     {
+      selectedImage && modalTrue && (
+         <BillDescriptor imgSource={selectedImage} modal={modalTrue} setModal={setModaltrue}/>
+      )
+     }
+
+
       
 
     </View>
