@@ -1,10 +1,34 @@
 import { Text, View, StyleSheet } from "react-native";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import ScanButton from "@/components/ScanButton";
 import SelectFile from "@/components/SelectFile";
 import CameraArea from "@/components/CamerArea";
+import * as ImagePicker from 'expo-image-picker';
+
+
 
 export default function Index() {
+  const pickImageAsync = async()=>{
+    let result = await ImagePicker.launchImageLibraryAsync(
+      {
+        mediaTypes:['images'],
+        allowsEditing:true,
+        quality:1,
+      }
+    )
+
+    if (!result.canceled){
+
+
+      router.push({
+        pathname:'/billDescript',
+
+      })
+      
+    }else {
+      alert("You did not select any image!")
+    }
+  }
   return (
     <View style={styles.container}>
       <CameraArea/>
@@ -13,7 +37,7 @@ export default function Index() {
       
       <ScanButton label=""/>
       <Text style={styles.text}> Or</Text>
-      <SelectFile label = "Choose a Bill"/>
+      <SelectFile label = "Choose a Bill" onPress={pickImageAsync}/>
       
 
     </View>

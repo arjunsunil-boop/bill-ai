@@ -3,13 +3,14 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
 type Props = {
     label:string
+    onPress?:()=> void
 }
 
-export default function SelectFile({label}:Props){
+export default function SelectFile({label,onPress}:Props){
     return (
         <View style={styles.buttonContainer}>
 
-            <Pressable style={styles.button} onPress={()=>{alert("You have pressed the Select File button")}}>
+            <Pressable style={styles.button} onPress={onPress}>
                 <MaterialCommunityIcons name="file-document" size={24} color="black" />
             <Text style={styles.buttonLabel}>{label}</Text>
             </Pressable>
