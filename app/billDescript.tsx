@@ -1,16 +1,28 @@
-import { View, Text, StyleSheet, Modal, SafeAreaView, Alert, Pressable, ImageSourcePropType } from "react-native";
-import { Image } from "expo-image"; 
-import { useLocalSearchParams } from "expo-router";
-import { SafeAreaProvider } from "react-native-safe-area-context";
-import { useState } from "react";
+import {
+    View,
+    Text,
+    StyleSheet,
+    Modal,
+    SafeAreaView,
+    Alert,
+    Pressable,
+    ImageSourcePropType,
+    TextInput
+} from "react-native";
+import {Image} from "expo-image";
+import {useLocalSearchParams} from "expo-router";
+import {SafeAreaProvider} from "react-native-safe-area-context";
+import {useState} from "react";
+import {callGuardDEV} from "react-native-reanimated/lib/typescript/initializers";
 
 type Props = {
     imgSource?: string
-    modal:boolean
+    modal: boolean
     setModal: (val: boolean) => void;
 }
-export default function BillDescriptor({ imgSource,modal,setModal }: Props) {
+export default function BillDescriptor({imgSource, modal, setModal}: Props) {
     const modalVisible = modal;
+    const[text,setText]=useState('');
     return (
         <SafeAreaProvider>
             <SafeAreaView style={styles.centeredView}>
@@ -20,7 +32,7 @@ export default function BillDescriptor({ imgSource,modal,setModal }: Props) {
                     visible={modal}
                     onRequestClose={
                         () => {
-                            
+
                             setModal(false)
                         }
                     }
@@ -33,7 +45,13 @@ export default function BillDescriptor({ imgSource,modal,setModal }: Props) {
                                     <Image source={imgSource} style={styles.img}/>
                                 </View>
                             </View>
-                            <Pressable style={[styles.button, styles.buttonClose]} onPress={() => setModal(false)}>
+                            <View>
+                                <TextInput onChangeText={setText} value={text}/>
+                            </View>
+                            <Pressable style={[styles.button, styles.buttonClose]} onPress={() => {
+                                setModal(false)
+                                console.log(text);
+                            }}>
                                 <Text style={styles.textStyle}>Done</Text>
                             </Pressable>
 
@@ -104,5 +122,11 @@ const styles = StyleSheet.create({
         marginBottom: 15,
         textAlign: 'center',
     },
+    inputBox:{
+        height: 40,
+        marginHorizontal: 20,
+        borderWidth: 1,
+        paddingHorizontal: 10,
+    }
 
 })
