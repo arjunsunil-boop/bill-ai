@@ -23,12 +23,12 @@ export default function BillsPage() {
       <View style={styles.cardContainer}>
         {
           bills.map(
-            (bill) => {
+            (bill, index) => {
               return (
 
-                <Pressable onPress={(bill)=>{alert(`You pressed ${bill}`)}}>
+                <Pressable style={styles.card} key={index} onPress={() => { alert(`You pressed ${index}`) }}>
 
-                  <View style={styles.card}>
+                 
                     <View style={styles.cardImageContainer}>
                       <Image source={{ uri: bill.img }} style={{ width: "100%", height: "100%", }} />
 
@@ -39,7 +39,7 @@ export default function BillsPage() {
                       </Text>
                     </View>
 
-                  </View>
+                  
 
                 </Pressable>
 
@@ -100,8 +100,9 @@ const styles = StyleSheet.create(
       overflow: "hidden"
 
     },
-    cardContainer:{
+    cardContainer: {
       
+
     }
 
   }
